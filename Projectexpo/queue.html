@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="mainpage.css">
+</head>
+<body>
+    <h1>Enter size of the Queue💥</h1>
+    <div>
+        <input type="number" id="yourid"> <button id="button">Fix</button>
+        
+       
+    
+    
+    </div>
+    <p> &#8594;</p> 
+    <a href="wholedsa.html"><button id="bac">Back</button></a>
+    
+    <script>
+        document.getElementById("button").addEventListener("click", function () {
+    let inputValue = document.getElementById("yourid").value;
+    
+    if (inputValue && Number(inputValue) > 0) {
+        localStorage.setItem("boxCount", inputValue.trim()); 
+                window.location.href = "quebox.html"; 
+    } else {
+        alert("Please enter a valid number");
+    }
+
+});
+    </script>
+
+   
+
+    
+</body>
+</html>

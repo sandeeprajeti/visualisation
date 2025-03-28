@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Stack</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #a8e6cf, #dcedc1, #ffd3b6);
+            background-size: cover;
+            margin: 0;
+        }
+        .stack-container {
+            width: 200px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            padding-top: 10px;
+            border-left: 4px solid #fff;
+            border-right: 4px solid #fff;
+            border-bottom: 4px solid #fff;
+        }
+        .stack-element {
+            width: 140px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 10px;
+            position: absolute;
+            transition: top 0.5s ease-in-out, transform 0.3s;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+        }
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input {
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        button:hover {
+            background: white;
+            color: #333;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input type="number" id="inputValue" placeholder="Enter number">
+        <button onclick="pushToStack()">Push</button>
+        <a href="2page.html"><button>Back</button></a>
+    </div>
+    <div class="stack-container" id="stack"></div>
+
+
+    <script>
+        let stack = [10, 20, 30];
+        let stackContainer = document.getElementById('stack');
+
+        function initializeStack() {
+            stackContainer.innerHTML = "";
+            stack.forEach((value, index) => {
+                let newElement = document.createElement('div');
+                newElement.classList.add('stack-element');
+                newElement.innerText = value;
+                newElement.style.top = `${index * 55}px`;
+                stackContainer.appendChild(newElement);
+            });
+        }
+
+        function pushToStack() {
+            let input = document.getElementById('inputValue');
+            let value = input.value;
+            if (value === "") return;
+
+            let elements = document.querySelectorAll(".stack-element");
+            elements.forEach(el => {
+                el.style.top = `${parseInt(el.style.top) + 55}px`;
+            });
+
+            let newElement = document.createElement('div');
+            newElement.classList.add('stack-element');
+            newElement.innerText = value;
+            newElement.style.top = "0px";
+            stackContainer.appendChild(newElement);
+            newElement.style.transform = "scale(1.1)";
+            setTimeout(() => newElement.style.transform = "scale(1)", 300);
+            
+            stack.unshift(value);
+            input.value = "";
+        }
+
+        initializeStack();
+      
+
+
+
+let colors = ['lightblue', 'lightgreen', 'lightpink', 'lightyellow', 'lightcoral', 'lightcyan', 'lavender'];
+let randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+let bubble = document.createElement('div');
+let size = 80; 
+
+bubble.style.width = `${size}px`;
+bubble.style.height = `${size}px`;
+bubble.style.borderRadius = '50%';
+bubble.style.backgroundColor = randomColor;
+bubble.style.opacity = '0.4'; 
+bubble.style.position = 'absolute';
+bubble.style.left = '50%';
+bubble.style.top = '50%';
+bubble.style.boxShadow = `0 0 10px ${randomColor}`;
+bubble.style.animation = 'moveBubble 8s linear infinite';
+
+document.body.appendChild(bubble);
+
+
+let styleSheet = document.createElement('style');
+styleSheet.innerHTML = `
+@keyframes moveBubble {
+    0% { top: 0; left: 80; }       
+    25% { top: 0; left: calc(80% - 50px); }  
+    50% { top: calc(80% - 50px); left: calc(80% - 50px); }
+    75% { top: calc(80% - 50px); left: 0; } 
+    100% { top: 0; left: 80; } 
+}
+`;
+document.head.appendChild(styleSheet);
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+

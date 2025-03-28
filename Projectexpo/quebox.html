@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Simulation</title>  
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e272e;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Queue Box Container */
+        #box-container {
+            display: flex;
+            gap: 0px;
+            justify-content: center;
+            margin-top: 50px;
+            position: relative;
+            padding: 10px;
+
+            width: fit-content;
+            background: rgba(255, 255, 255, 0.1);
+
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .box {
+    width: 50px; /* Fixed width */
+    height: 50px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    background: none;
+
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+
+        .box:hover {
+            transform: scale(1.1);
+        }
+
+        
+        #sticky-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+            display: inline-block;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
+            width: 150px;
+            box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+            background: white;
+            color: black;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #ff4757;
+            color: white;
+            transition: background 0.3s ease-in-out, transform 0.2s ease;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #ff6b81;
+            transform: scale(1.1);
+        }
+
+        
+        .moving-number {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 2s ease-in-out;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="box-container"></div>
+
+    <div id="sticky-container">
+        <h1>Enter a Value</h1>
+        <input type="text" pattern="[A-Za-z0-9]+" title="Only letters and numbers allowed" placeholder="Enter value" id="na"> 
+        <button id="generateBtn">Click</button>
+        <a href="queue.html"><button>Back</button></a>
+        <a href="enqueue.html"><button>Enqueue</button></a>
+        <a href="dequeue.html"><button>Dequeue</button></a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let container = document.getElementById("box-container");
+            let inputField = document.getElementById("na");
+            let button = document.getElementById("generateBtn");
+
+            let boxCount = localStorage.getItem("boxCount");
+            if (!boxCount || isNaN(boxCount) || boxCount <= 0) {
+                alert("Invalid Queue Size. Redirecting to Home Page.");
+                window.location.href = "index.html"; 
+                return;
+            }
+            boxCount = Number(boxCount);
+
+            let currentIndex = 0;
+
+            for (let i = 0; i < boxCount; i++) {
+                let createBox = document.createElement("div");
+                createBox.classList.add("box");
+                
+                if (i === 0) {
+                    createBox.style.borderLeft = "none";
+                }
+                if (i === boxCount - 1) {
+                    createBox.style.borderRight = "none";
+                }
+                container.appendChild(createBox);
+            }
+
+            let boxes = document.querySelectorAll(".box");
+
+            button.addEventListener("click", function() {
+                let inputValue = inputField.value.trim();
+
+                if (inputValue !== "" && currentIndex < boxes.length) {
+                    let box = boxes[currentIndex];
+
+                    let movingNumber = document.createElement("span");
+                    movingNumber.classList.add("moving-number");
+                    movingNumber.textContent = inputValue;
+                    document.body.appendChild(movingNumber);
+
+                    let inputRect = inputField.getBoundingClientRect();
+                    movingNumber.style.left = `${inputRect.left + window.scrollX + 10}px`;
+                    movingNumber.style.top = `${inputRect.top + window.scrollY}px`;
+
+                    let boxRect = box.getBoundingClientRect();
+                    setTimeout(() => {
+                        movingNumber.style.left = `${boxRect.left + window.scrollX + 10}px`;
+                        movingNumber.style.top = `${boxRect.top + window.scrollY}px`;
+                    }, 100);
+
+                    setTimeout(() => {
+                        box.textContent = inputValue;
+                        document.body.removeChild(movingNumber);
+                        currentIndex++;
+                        inputField.value = "";
+                    }, 2000);
+
+                } else if (currentIndex >= boxes.length) {
+                    alert("Queue is full!");
+                } else {
+                    alert("Please enter a valid value!");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

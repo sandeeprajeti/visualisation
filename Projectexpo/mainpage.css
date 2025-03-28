@@ -1,0 +1,90 @@
+body {
+    background: linear-gradient(135deg, #6200EA, #FFD600    );
+    background-size: 400% 400%;
+    animation: gradient 6s infinite alternate;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+h1 {
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 170px;
+    padding-bottom: 50px;
+}
+input[type="number"]::-webkit-outer-spin-button ,
+input[type="number"]::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+input[type="number"] 
+{
+
+   
+width: 200px;
+padding: 10px;
+font-size: 16px;
+border: 2px solid #333;
+border-radius: 5px;
+}
+button {
+    height: 50px;
+    width: 150px;
+    border-radius: 10px;
+    font-size: 25px;
+    background-color: #FFD600;
+    color: black;
+    transform: translate(100px);
+    transition: all 0.3s ease-in-out; 
+}
+
+div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+p {
+    width: 150px;
+    margin-left: 750px;
+    font-size: 50px;
+    margin-top: -50px;
+    
+   
+
+}
+#venaki {
+    position: absolute;
+    left: 650px;  
+    bottom: 50px;
+    background-color: orangered;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: center; 
+}
+
+
+#venaki:hover {
+    transform: scale(1.1);
+    background-color: #ff6347; 
+    box-shadow: 0px 4px 10px rgba(255, 99, 71, 0.5);
+    border: 2px solid black;
+}
+
+
+#venaki:not(:hover) {
+    transform: scale(1);
+    background-color: orangered;
+    box-shadow: none;
+}
+#bac {
+    margin-left: 550px;
+}

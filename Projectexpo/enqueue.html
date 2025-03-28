@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rowdies:wght@300;400;700&display=swap');       
+        body {
+            background-color: #181818;  
+            
+        }
+        #main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            margin-top: 100px;
+            color: #E7E7E7;
+            gap: 0px;
+        }
+ 
+        #yourid {
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 20px;
+    background-color: #181818;
+    border-color: white;
+    color: white;
+    margin: 0;
+
+    
+    appearance: none;
+
+    
+    -webkit-appearance: none; 
+    -moz-appearance: textfield; 
+}
+
+#yourid::-webkit-inner-spin-button,
+#yourid::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#yourid:focus {
+    border-color: #1f6feb;
+    box-shadow: 0px 0px 18px #1f6feb;
+}
+
+    
+    #button {
+        border-radius: 10px;
+        border-color: white;
+        background-color: #181818;
+        color: white;
+    }
+    #button:hover {
+
+    transform: scale(1.1);
+}
+    #container {
+        margin-top: 200px;
+        margin-left: 600px; 
+        width: 50px;
+        height: 50px;
+        gap: 20px;
+        color: #E7E7E7;
+        
+ 
+        display: flex;
+    }
+    p {
+        font-family: 'Rowdies', cursive;
+        font-size: 25px;
+        text-align: center;
+        margin-left: -450px;
+        margin-top: -40px;
+        font-size: 30px;
+        color: white;
+
+       
+ 
+
+    }
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        color: white;
+     
+        margin-left: 1100px;
+        transform: translate(50px  , 130px);
+        
+ 
+        
+        
+    }
+    #abck {
+    border-radius: 10px;
+    border: 2px solid white;
+    background-color: #181818;
+    color: white;
+    padding: 14px 30px;  /* Ensures equal padding */
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px; /* Keep font size consistent */
+    
+
+}
+
+    #abck:hover {
+
+    transform: scale(1.1);
+    box-shadow: 0px 0px 18px #1f6feb;
+}
+#aroow {
+    color: white;
+    margin-left: -20px;
+    margin-top: -110px;
+    
+    
+
+}
+
+    
+
+ 
+</style>
+</head>
+<body>
+    <div id="main"></div>
+    <h1>Newly Added elements</h1>
+ 
+
+    <div id="container">
+        <input type="number" id="yourid"> 
+        <button id="button">Enqueue</button>
+        <a href="quebox.html"><button id="abck">Back</button></a>
+        
+        
+        <p id="aroow">&#8594</p>
+
+    </div>
+    <p> Enter a value : </p>
+ 
+    <script>
+        let boxes = 4;
+        let main = document.getElementById("main");
+    
+        for (let i = 0; i < boxes; i++) {
+            let num = [10, 20, 30, 40];
+            let box = document.createElement("div");
+    
+            box.style.width = "50px";
+            box.style.height = "50px";
+            box.style.border = "2px solid black";
+            box.style.display = "inline-flex";
+            box.style.alignItems = "center"; 
+            box.style.justifyContent = "center"; 
+            box.style.margin = "0px"; 
+            box.style.fontWeight = "bold"; 
+            box.style.fontSize = "18px";
+            box.style.color = "#E7E7E7";
+            box.style.border = "1px solid #E7E7E7";
+            box.style.overflow = "hidden";
+            box.style.textOverflow = "ellipsis";
+            box.style.whiteSpace = "nowrap";
+            
+            box.innerHTML = num[i];
+    
+            if (i === 0) {
+                box.style.borderLeft = "none";
+            }
+            if (i === boxes - 1) {
+                box.style.borderRight = "none";
+            }
+    
+            main.appendChild(box);
+            
+            document.getElementById("button").addEventListener("click", function () {
+                let inputvalue = document.getElementById("yourid").value;
+    
+                if (inputvalue === "") return;
+    
+                let anotherbox = document.createElement("div");
+    
+                anotherbox.style.width = "50px";
+                anotherbox.style.height = "50px";
+                anotherbox.style.border = "2px solid black";
+                anotherbox.style.display = "inline-flex";
+                anotherbox.style.alignItems = "center";
+                anotherbox.style.justifyContent = "center";
+                anotherbox.style.margin = "0px";
+                anotherbox.style.fontWeight = "bold";
+                anotherbox.style.fontSize = "18px";
+                anotherbox.style.border = "1px solid #E7E7E7";
+                anotherbox.style.color = "yellow";
+                anotherbox.style.overflow = "hidden";
+                anotherbox.style.textOverflow = "ellipsis";
+                anotherbox.style.whiteSpace = "nowrap";
+                
+                
+                if (inputvalue.length > 3) anotherbox.style.fontSize = "14px";
+                if (inputvalue.length > 6) anotherbox.style.fontSize = "12px";
+                if (inputvalue.length > 9) anotherbox.style.fontSize = "10px";
+                if (inputvalue.length > 12) anotherbox.style.fontSize = "8px";
+    
+                anotherbox.textContent = inputvalue;
+                anotherbox.style.position = "relative";
+                anotherbox.style.top = "200px"; 
+                anotherbox.style.opacity = "0";
+                anotherbox.style.transition = "top 1.2s ease-in-out, opacity 1s ease-in-out";
+    
+                document.getElementById("main").prepend(anotherbox);
+    
+                setTimeout(() => {
+                    anotherbox.style.top = "0px";  
+                    anotherbox.style.opacity = "1";
+
+                }, 100);
+    
+                document.getElementById("yourid").value = "";
+            });
+    
+        }
+        const smallBox = document.createElement("div");
+    smallBox.style.width = "30px";
+    smallBox.style.height = "30px";
+    smallBox.style.backgroundColor = "yellow";
+    smallBox.style.border = "2px solid black";
+    smallBox.style.position = "absolute";
+    smallBox.style.bottom = "20px";
+    smallBox.style.marginBottom="300px";  
+    smallBox.style.right = "380px";  
+    document.body.appendChild(smallBox);
+    </script>
+    
+</body>
+</html>
+
+
+
+</body>
+</html>

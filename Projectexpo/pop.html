@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Stack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            background-color: #1e1e1e; 
+            color: white;
+        }
+        .stack-container {
+            width: 200px;
+            height: 300px;
+            border: 2px solid #fff;
+            border-top: none; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            padding-top: 10px;
+        }
+        .element {
+            width: 100px;
+            height: 40px;
+            background: linear-gradient(to right, #ff7eb3, #ff758c);
+            color: white;
+            margin: 5px 0;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            position: absolute;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+        button {
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: background 0.3s;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+        button:hover {
+            background-color: #e03e4d;
+        }
+        h3 {
+            color: white;
+        }
+        #back {
+            position: absolute; 
+            top: 50px;
+            right: 520px; 
+    
+            transform: translateZ(550px); 
+        }
+
+    </style>
+</head>
+<body>
+    <button onclick="popFromStack()">Pop from Stack</button>
+    <div>
+        <h3>Stack</h3>
+        <div class="stack-container" id="stack"></div>
+        <a href="2page.html"><button id="back">Back</button></a>
+    </div>
+
+    <script>
+        let stack = [10, 20, 30];
+
+        function initializeStack() {
+            let stackContainer = document.getElementById('stack');
+            stack.forEach((value, index) => {
+                let newElement = document.createElement('div');
+                newElement.classList.add('element');
+                newElement.innerText = value;
+                newElement.style.bottom = `${index * 50}px`;
+                stackContainer.appendChild(newElement);
+            });
+        }
+
+        function popFromStack() {
+            if (stack.length === 0) return;
+            let stackContainer = document.getElementById('stack');
+            let lastElement = stackContainer.lastElementChild;
+            if (!lastElement) return;
+            
+            lastElement.style.transform = 'translateY(-60px)';
+            lastElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                stackContainer.removeChild(lastElement);
+                stack.pop();
+            }, 500);
+        }
+        
+        initializeStack();
+    </script>
+</body>
+</html>
